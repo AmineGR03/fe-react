@@ -1,0 +1,49 @@
+.dishes-section {
+    padding: 50px 0;
+  }
+  
+  .dishes-container {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  .dishes-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+  }
+  
+  .dish-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    transition: all 0.3s ease;
+  }
+  
+  .dish-card.active {
+    flex: 0 0 40%; /* Adjust the size of the active item */
+  }
+  
+  .dish-card:not(.active) {
+    flex: 0 0 30%; /* Adjust the size of other items */
+  }
+  
+  .dish-content {
+    text-align: center;
+  }
+  
+  .dish-content h5 {
+    margin-bottom: 10px;
+  }
+  
+  .dish-image img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+  }
+  
