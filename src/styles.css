@@ -128,3 +128,8 @@ header .logo {
     box-shadow: var(--box-shadow);
     padding: 50px;
 }
+
+.footer
+{
+    background-color: #192a56;
+}

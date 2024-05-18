@@ -1,89 +1,75 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './Dishes.css'; // Import CSS file for styling
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { Link } from 'react-router-dom';
 
 const Dishes = () => {
-  const dishes = [
-    {
-      id: 1,
-      name: 'Grilled Chicken',
-      description: 'Juicy grilled chicken served with your choice of sides.',
-      imgUrl: 'https://via.placeholder.com/300',
-    },
-    {
-      id: 2,
-      name: 'Fried Chicken',
-      description: 'Crispy fried chicken served with fries.',
-      imgUrl: 'https://via.placeholder.com/300',
-    },
-    {
-      id: 3,
-      name: 'Caesar Salad',
-      description: 'Fresh romaine lettuce, parmesan cheese, and croutons, dressed with Caesar dressing.',
-      imgUrl: 'https://via.placeholder.com/300',
-    },
-    {
-      id: 4,
-      name: 'Margherita Pizza',
-      description: 'Classic pizza topped with tomato, mozzarella, and basil.',
-      imgUrl: 'https://via.placeholder.com/300',
-    },
-    {
-      id: 5,
-      name: 'Chocolate Cake',
-      description: 'Decadent chocolate cake served with a scoop of vanilla ice cream.',
-      imgUrl: 'https://via.placeholder.com/300',
-    },
-  ];
-
-  const [currentDishId, setCurrentDishId] = useState(1);
-  const dishesContainerRef = useRef(null);
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentDishId((prevId) => (prevId % dishes.length) + 1);
-    }, 2500);
-
-    return () => clearInterval(interval);
-  }, [dishes.length]);
-
-  useEffect(() => {
-    if (dishesContainerRef.current) {
-      const dishWidth = dishesContainerRef.current.offsetWidth / dishes.length;
-      const scrollTo = (currentDishId - 1) * dishWidth;
-      dishesContainerRef.current.scrollTo({
-        left: scrollTo,
-        behavior: 'smooth',
+    axios.get('http://127.0.0.1:8000/api/menus')
+      .then(response => {
+        const modifiedItems = response.data.map(item => ({
+          ...item,
+          pic: `http://127.0.0.1:8000/storage/images/${item.pic}` 
+        }));
+        setItems(modifiedItems);
+      })
+      .catch(error => {
+        console.error('Error fetching menu items:', error);
       });
-    }
-  }, [currentDishId, dishes.length]);
+  }, []);
+  console.log(items);
+
+  // Filter items where highlight is equal to 1
+  const highlightedItems = items.filter(item => item.highlight === 1);
+
+  // Configuration for the slider
+  const sliderSettings = {
+    dots: false,
+    infinite: true,
+    focusOnSelect: true,
+    slidesToShow: highlightedItems.length, // Set slidesToShow to the number of highlighted items
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 5000,
+    autoplaySpeed: 5000,
+    cssEase:'linear'
+  };
 
   return (
-    <section className="dishes-section">
-      <div className="container-fluid mt-1">
-        <div className="row">
-          <div className="col">
-            <h2 className="text-center mb-4">Dishes</h2>
-            <div className="dishes-container" ref={dishesContainerRef}>
-              {dishes.map((dish) => (
-                <div
-                  key={dish.id}
-                  className={`dish-card ${dish.id === currentDishId ? 'active' : ''}`}
-                  style={{ width: `${100 / dishes.length}%` }}
-                >
-                  <div className="dish-content">
-                    <h5>{dish.name}</h5>
-                    <p>{dish.description}</p>
-                  </div>
-                  <div className="dish-image">
-                    <img src={dish.imgUrl} alt={dish.name} />
+    <div className="container">
+      <div className="row">
+        <div className="col-12">
+          <h2 className="text-center mb-4 mt-4">Nos plats à la lune</h2>
+          <div className="dishes-container">
+            <Slider {...sliderSettings}>
+              {highlightedItems.map(item => (
+                <div key={item.id} className="dish-card active">
+                  <div className="row align-items-center">
+                    <div className="col-md-6">
+                      <img src={item.pic} alt={item.name} width="200px" height="150px" />
+                    </div>
+                    <div className="col-md-6">
+                      <div className="dish-content text-right">
+                        <h3>{item.name}</h3>
+                        <p>{item.highlight_note}</p>
+                        <p>{item.price}</p>
+                        <Link to={`/item/${item.id}`} className="btn btn-primary mt-1">
+                       View Product
+                      </Link>
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
-            </div>
+            </Slider>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

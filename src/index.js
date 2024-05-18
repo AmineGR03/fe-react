@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import store from './ProjectRedux/Store';
 import App from './App';
-const corse=require("cors");
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

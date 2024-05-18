@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MenuSection from './MenuSection';
 import ReviewSection from './ReviewSection';
 import ContactSection from './ContactSection';
-import Footer from './Footer';
+
 import Dishes from './DishesSections';
 import Cart from './Cart';
 import HomePage from './HomePage';

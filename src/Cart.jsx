@@ -24,9 +24,9 @@ const Cart = () => {
 
   return (
     <>
-      <header className="navbar navbar-expand-lg fixed-top">
+      <header className="navbar navbar-expand-lg fixed-top" style={{ backgroundColor: '#192a56' ,color:'white'}}>
         <div className="container">
-          <Link className="navbar-brand logo" to="/">Chicken Forever</Link>
+          <Link className="navbar-brand logo" style={{color:'white'}} to="/">Chicken Forever</Link>
         </div>
       </header>
       <div className="container mt-5 pt-4">
