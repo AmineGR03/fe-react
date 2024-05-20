@@ -25,7 +25,7 @@ const ContactSection = () => {
       <div className="container mt-3">
         <div className="row justify-content-center">
           <div className="col-lg-6">
-            <h2 className="text-center mb-4">Contact</h2>
+            <h2 className="text-center mb-4" style={{fontSize:'40px'}}>Contact</h2>
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="name">Name</label>

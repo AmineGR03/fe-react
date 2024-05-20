@@ -6,6 +6,8 @@ const MenuSection = () => {
   const [items, setItems] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [isFiltering, setIsFiltering] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     axios.get('http://127.0.0.1:8000/api/menus')
@@ -15,6 +17,8 @@ const MenuSection = () => {
           pic: `http://127.0.0.1:8000/storage/images/${item.pic}`
         }));
         setItems(modifiedItems);
+        const uniqueCategories = [...new Set(modifiedItems.map(item => item.categorie))];
+        setCategories(uniqueCategories);
       })
       .catch(error => {
         console.error('Error fetching menu items:', error);
@@ -22,11 +26,12 @@ const MenuSection = () => {
   }, []);
 
   const filteredItems = () => {
+    let filtered = items;
+    if (selectedCategory) {
+      filtered = filtered.filter(item => item.categorie === selectedCategory);
+    }
     const nameToLower = searchTerm.toLowerCase();
-    return items.filter(item => {
-      const itemNameToLower = item.name.toLowerCase();
-      return itemNameToLower.includes(nameToLower);
-    });
+    return filtered.filter(item => item.name.toLowerCase().includes(nameToLower));
   };
 
   const handleSearchChange = (e) => {
@@ -38,30 +43,51 @@ const MenuSection = () => {
     setIsFiltering(true);
   };
 
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
+    setIsFiltering(true);
+  };
+
   const displayItems = isFiltering ? filteredItems() : items;
 
   return (
     <section>
       <div className="container mt-3">
-      <h2 className="text-center mb-4 mt-4">Menu</h2>
+        <h2 className="text-center mb-4 mt-4" style={{fontSize:'40px'}}>Menu</h2>
         <div className="row justify-content-center mb-4">
           <div className="col-12 col-md-6 col-lg-4">
-            <div className="  mb-2">
+            <div className="mb-2">
               <input
                 type="text"
                 value={searchTerm}
                 onChange={handleSearchChange}
-                className="form-control "
+                className="form-control"
                 placeholder='Cherchez !'
-                  
               />
-              <button
-                type="button"
-                onClick={handleFilterClick}
-                className="btn btn-secondary "
+            </div>
+          </div>
+          
+          <div className="col-12  col-lg-4 d-flex justify-content-center">
+            <button
+              type="button"
+              onClick={handleFilterClick}
+              className="btn btn-secondary"
+            >
+              Filter
+            </button>
+          </div>
+          <div className="col-12  col-lg-4">
+            <div className="mb-2">
+              <select
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+                className="form-select"
               >
-                Filter
-              </button>
+                <option value="">Tout le menu</option>
+                {categories.map(category => (
+                  <option key={category} value={category}>{category}</option>
+                ))}
+              </select>
             </div>
           </div>
         </div>
@@ -74,8 +100,6 @@ const MenuSection = () => {
                   className="card-img-top image-thumbnail"
                   alt={item.name}
                   height="200px"
-                  
-                  
                 />
                 <div className="card-body">
                   <h5 className="card-title">{item.name}</h5>
@@ -96,7 +120,3 @@ const MenuSection = () => {
 };
 
 export default MenuSection;
-
-
-
-

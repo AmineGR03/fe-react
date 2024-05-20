@@ -5,7 +5,7 @@ const ReviewSection = () => {
     <section>
       
       <div className="container my-3">
-      <h2 className="text-center mb-4">Reviews</h2>
+      <h2 className="text-center mb-4" style={{fontSize:'40px'}}>Reviews</h2>
         <div className="row">
           <div className="col-md-6">
             <div className="card mb-4">

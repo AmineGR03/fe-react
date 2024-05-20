@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './SignUpForm.css';
-import { FaShoppingCart, FaIdCard } from 'react-icons/fa';
+import logo from '../img/logopfe.png';
 import { Link } from 'react-router-dom';
 
 const SignUpForm = () => {
@@ -25,6 +25,7 @@ const SignUpForm = () => {
       if (response.status === 200) {
         const data = response.data;
         console.log(data);
+        alert('Registration successful! Please log in.');
       } else {
         throw new Error('Failed to register. Please try again.');
       }
@@ -36,21 +37,9 @@ const SignUpForm = () => {
 
   return (
     <>
-      <header className="navbar navbar-expand-lg fixed-top">
+      <header className="navbar navbar-expand-lg fixed-top" style={{ backgroundColor: '#192a56', color: 'white' }}>
         <div className="container">
-          <Link className="navbar-brand logo" to="/">Chicken Forever</Link>
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link className="nav-link icon" to="/cart">
-                <FaShoppingCart icon="fas fa-shopping-cart" />
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link icon" to="/login">
-                <FaIdCard icon="far fa-id-card" />
-              </Link>
-            </li>
-          </ul>
+          <Link className="navbar-brand logo mx-3 " style={{ color: 'white' }} to="/"><img src={logo} alt="logo" className="logo-img" />&nbsp;Chicken Forever</Link>
         </div>
       </header>
       <div className="d-flex justify-content-center align-items-center vh-100">

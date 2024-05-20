@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import { addToCart } from './ProjectRedux/cart/cartReducer';
 import { useDispatch } from 'react-redux';
 import { FaShoppingCart, FaIdCard } from 'react-icons/fa';
+import logo from './img/logopfe.png';
 
 const ItemDetail = () => {
   const [item, setItem] = useState(null);
@@ -39,7 +40,7 @@ const ItemDetail = () => {
     <>
       <header className="navbar navbar-expand-lg fixed-top" style={{ backgroundColor: '#192a56' ,color:'white'}}>
         <div className="container">
-          <Link className="navbar-brand logo" style={{color:'white'}} to="/">Chicken Forever</Link>
+        <Link className="navbar-brand logo mx-3 " style={{color:'white'}} to="/"><img src={logo} alt="logo" className="logo-img" />&nbsp;Chicken Forever</Link>
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
               <Link className="nav-link icon" to="/cart">

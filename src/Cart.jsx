@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector , useDispatch} from 'react-redux';
 import { Link } from 'react-router-dom';
 import { removeFromCart, updateQuantity } from './ProjectRedux/cart/cartReducer';
-
+import logo from './img/logopfe.png';
 const Cart = () => {
   const cartItems = useSelector(state => state.items); 
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const Cart = () => {
     <>
       <header className="navbar navbar-expand-lg fixed-top" style={{ backgroundColor: '#192a56' ,color:'white'}}>
         <div className="container">
-          <Link className="navbar-brand logo" style={{color:'white'}} to="/">Chicken Forever</Link>
+        <Link className="navbar-brand logo mx-3 " style={{color:'white'}} to="/"><img src={logo} alt="logo" className="logo-img" />&nbsp;Chicken Forever</Link>
         </div>
       </header>
       <div className="container mt-5 pt-4">
