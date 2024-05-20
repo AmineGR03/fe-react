@@ -13,7 +13,7 @@ const Dishes = () => {
       .then(response => {
         const modifiedItems = response.data.map(item => ({
           ...item,
-          pic: `http://127.0.0.1:8000/storage/images/${item.pic}` 
+          pic: `http://127.0.0.1:8000/storage/images/${item.pic}`
         }));
         setItems(modifiedItems);
       })
@@ -21,22 +21,21 @@ const Dishes = () => {
         console.error('Error fetching menu items:', error);
       });
   }, []);
-  console.log(items);
 
-  // Filter items where highlight is equal to 1
   const highlightedItems = items.filter(item => item.highlight === 1);
 
-  // Configuration for the slider
   const sliderSettings = {
     dots: false,
     infinite: true,
     focusOnSelect: true,
-    slidesToShow: highlightedItems.length, // Set slidesToShow to the number of highlighted items
+    slidesToShow: highlightedItems.length,
     slidesToScroll: 1,
     autoplay: true,
     speed: 5000,
     autoplaySpeed: 5000,
-    cssEase:'linear'
+    cssEase: 'linear',
+    variableWidth: true,
+    variableHeight: true
   };
 
   return (
@@ -74,3 +73,4 @@ const Dishes = () => {
 };
 
 export default Dishes;
+

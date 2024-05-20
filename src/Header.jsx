@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaShoppingCart,FaIdCard } from 'react-icons/fa';
-import './header.css'
+import './header.css';
+import logo from './img/logopfe.png';
 
 
 const Header = () => {
@@ -19,7 +20,7 @@ const Header = () => {
   return (
     <header className="navbar navbar-expand-lg  fixed-top" style={{ backgroundColor: '#192a56' ,color:'white'}}>
       <div className="container">
-        <Link className="navbar-brand logo " style={{color:'white'}} to="/">Chicken Forever</Link>
+        <Link className="navbar-brand logo mx-3 " style={{color:'white'}} to="/"><img src={logo} alt="logo" className="logo-img" />&nbsp;Chicken Forever</Link>
         <div className="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
           <ul className="navbar-nav">
             <li className="nav-item">

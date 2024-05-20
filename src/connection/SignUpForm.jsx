@@ -25,7 +25,6 @@ const SignUpForm = () => {
       if (response.status === 200) {
         const data = response.data;
         console.log(data);
-        // Redirect logic
       } else {
         throw new Error('Failed to register. Please try again.');
       }

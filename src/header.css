@@ -6,3 +6,8 @@
   .nav-link-custom:hover {
     background-color: #27ae60;
   }
+  .logo-img {
+    width: 40px;  /* Adjust the width as needed */
+    height: 4%; /* Adjust the height as needed */
+  }
+  
