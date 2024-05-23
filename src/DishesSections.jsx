@@ -31,7 +31,7 @@ const Dishes = () => {
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
-    speed: 7000,
+    speed: 10000,
     autoplaySpeed: 500,
     cssEase: 'linear',
     variableWidth: true,
@@ -55,7 +55,7 @@ const Dishes = () => {
                       <div className="dish-content text-right">
                         <h3>{item.name}</h3>
                         <p>{item.highlight_note}</p>
-                        <p className="card-text mt-2 price"><strong>Price : </strong><b style={{color:'#27ae60'}}>${item.price}</b></p>
+                        <p className="card-text mt-2 price"><strong>Price : </strong><b style={{color:'#27ae60'}}>{item.price} DH</b></p>
                         
                         <Link to={`/item/${item.id}`} className="btn btn-primary mt-1">
                        View Product

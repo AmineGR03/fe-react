@@ -16,7 +16,8 @@ const ItemDetail = () => {
       const response = await axios.get(`http://127.0.0.1:8000/api/menus/${id}`);
       const modifiedItem = {
         ...response.data,
-        pic: `http://127.0.0.1:8000/storage/images/${response.data.pic}`
+        pic: `http://127.0.0.1:8000/storage/images/${response.data.pic}`,
+        info: response.data.info.replace(/\n/g, "<br>") // Replace newline characters with <br> tags
       };
       setItem(modifiedItem);
     } catch (error) {
@@ -38,9 +39,9 @@ const ItemDetail = () => {
 
   return (
     <>
-      <header className="navbar navbar-expand-lg fixed-top" style={{ backgroundColor: '#192a56' ,color:'white'}}>
+      <header className="navbar navbar-expand-lg fixed-top" style={{ backgroundColor: '#192a56', color: 'white' }}>
         <div className="container">
-        <Link className="navbar-brand logo mx-3 " style={{color:'white'}} to="/"><img src={logo} alt="logo" className="logo-img" />&nbsp;Chicken Forever</Link>
+          <Link className="navbar-brand logo mx-3 " style={{ color: 'white' }} to="/"><img src={logo} alt="logo" className="logo-img" />&nbsp;Chicken Forever</Link>
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
               <Link className="nav-link icon" to="/cart">
@@ -56,30 +57,31 @@ const ItemDetail = () => {
         </div>
       </header>
       <div className="container mt-5 pt-4">
-        <div className="container mt-5">
-          <div className="row">
-            <div className="col-md-8">
-              <div className="card">
-                <img
-                  src={item.pic}
-                  className="card-img-top"
-                  alt={item.name}
-                />
-              </div>
-            </div>
-            <div className="col-md-4">
-              <div className="card">
-                <div className="card-body">
-                  <h2 className="card-title">{item.name}</h2>
-                  <p className="card-text">{item.info}</p>
-                  <p className="card-text">Price: ${item.price}</p>
-                  <button className="btn btn-primary" onClick={handleAddToCart}>Add to Cart</button>
-                </div>
+        <div className="row">
+          <div className="col-md-6">
+            <img src={item.pic} className="img-fluid" alt={item.name} />
+          </div>
+          <div className="col-md-6">
+            <div className="card">
+              <div className="card-body">
+                <h2 className="card-title">{item.name}</h2>
+                
+                <p className="card-text" dangerouslySetInnerHTML={{ __html: item.info }}></p>
+                <p className="card-text"><strong>Price:</strong> <b style={{color:'#27ae60'}}>{item.price} DH</b></p>
+                <button className="btn btn-primary" onClick={handleAddToCart}>Add to Cart</button>
               </div>
             </div>
           </div>
         </div>
+        <div className="row mt-5">
+          <div className="col-md-12">
+            <h2 className="text-center mb-4">Contact Us</h2>
+            {/* <ContactForm /> */}
+          </div>
+        </div>
       </div>
+      {/* Slider for Similar Products */}
+      {/* Add your slider component for similar products here */}
     </>
   );
 };

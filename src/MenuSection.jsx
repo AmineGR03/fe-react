@@ -104,7 +104,7 @@ const MenuSection = () => {
                 <div className="card-body">
                   <h5 className="card-title">{item.name}</h5>
                   <p className="card-text mt-2 price">
-                    <strong>Price:</strong> <span>${item.price}</span>
+                    <strong>Price:</strong> <span>{item.price} DH</span>
                   </p>
                   <Link to={`/item/${item.id}`} className="btn btn-primary mt-1">
                     View Product

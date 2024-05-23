@@ -1,0 +1,10 @@
+.slick-slide {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .slick-slide .card {
+    width: 90vw; /* Adjust the width as necessary */
+    max-width: 300px; /* Set a max-width to prevent overly large slides */
+  }
+  
